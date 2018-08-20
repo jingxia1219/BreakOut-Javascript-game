@@ -49,8 +49,8 @@ div.how-to-play {
   padding-left: 20px;
   padding-right: 15px;
   align-content: center;
-  background-size: 240%;
-  background-image: url("./images/white-bricks.jpg");
+  background-size: 35%;
+  background-image: url("./images/brick-background.jpg");
   backface-visibility: 0.8;
 }
 
