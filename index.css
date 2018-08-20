@@ -43,14 +43,15 @@ div.how-to-play {
   /* display: flex; */
   position: absolute;
   margin-left: 800px;
-  width: 200px;
+  width: 210px;
   height: 520px;
   padding-top: 80px;
-  padding-left: 15px;
+  padding-left: 20px;
   padding-right: 15px;
   align-content: center;
-  background-size: 30%;
-  background-image: url("./images/brick-background.jpg");
+  background-size: 240%;
+  background-image: url("./images/white-bricks.jpg");
+  backface-visibility: 0.8;
 }
 
 h2.title {
