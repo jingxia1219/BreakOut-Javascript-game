@@ -33,7 +33,7 @@ canvas {
   /* background-size: 80%; */
   /* background-image: url("https://media.gettyimages.com/photos/medium-golden-brown-wood-texture-background-picture-id513694258?b=1&k=6&m=513694258&s=612x612&w=0&h=z8DULXFx6x_3v6b6gRox4z1iSrm5xrHcEYLxjtRm10o="); */
   /* background-image: url("https://motionarray.imgix.net/preview-97469-fud8TBhHpr-high_0002.jpg?w=750&q=60&fit=max&auto=format"); */
-  background-image: url("https://vignette.wikia.nocookie.net/steamtradingcards/images/9/9a/Syder_Arcade_Background_Opposing_Forces.jpg/revision/latest?cb=20140831224527");
+  background-image: url("./images/canvas-background.jpg");
   /* background-image: url("http://www.ludumdare.com/compo/wp-content/uploads/2014/05/interface.png"); */
 }
 
@@ -50,7 +50,7 @@ div.how-to-play {
   padding-right: 15px;
   align-content: center;
   background-size: 30%;
-  background-image: url("https://cdn.pixabay.com/photo/2017/02/15/11/05/background-2068283_960_720.jpg");
+  background-image: url("./images/brick-background.jpg");
 }
 
 h2.title {
