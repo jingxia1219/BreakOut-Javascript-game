@@ -3,14 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Javascript game</title>
-    <style>
-    * { padding:0; margin: 0; }
-    canvas { background: #eee; display: block; margin: 0 auto; }
-    </style>
+    <link rel="stylesheet" href="index.css">
+
   </head>
   <body>
 
-  <canvas id='myCanvas' width='480' height='320'></canvas>
+  <canvas id='myCanvas' width='780' height='479'></canvas>
 
   <script>
     var canvas= document.getElementById("myCanvas");
@@ -18,23 +16,25 @@
 
     var x = canvas.width/2; //ball start from the center of bottom
     var y = canvas.height - 30;  //30px from the bottom
-    var ballRadius = 10;
+    var ballRadius = 12;
     var dx = 2;
     var dy = -2;
-    var paddleHeight = 10;
-    var paddleWidth = 75;
+    var paddleHeight = 12;
+    var paddleWidth = 91;
     var paddleX = ( canvas.width - paddleWidth)/2;
 
     var rightPressed = false;
     var leftPressed = false;
 
     var brickRowCount = 3;
-    var brickColumnCount = 6;
-    var brickWidth = 62;
-    var brickHeight = 15;
-    var brickPadding = 12;
-    var brickOffsetTop = 25;
-    var brickOffsetLeft= 30;
+    var brickColumnCount = 8;
+    var brickWidth = 74.4;
+    var brickHeight = 18;
+    var brickPadding = 14.4;
+    var brickOffsetTop = 58;
+    var brickOffsetLeft= 38;
+    var score = 0;
+
 
     var bricks = [];
     for ( var c = 0; c < brickColumnCount; c++) {
@@ -46,6 +46,14 @@
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
+    document.addEventListener("mousemove", mouseMoveHandler, false);
+
+    function mouseMoveHandler(e) {
+      var relativeX = e.clientX - canvas.offsetLeft;
+      if ( relativeX > paddleWidth/2+ 3 && relativeX < canvas.width - paddleWidth/2 - 3 ) {
+        paddleX = relativeX - paddleWidth/2;
+      }
+    }
 
     function keyDownHandler(e) {
       if (e.keyCode == 39) {
@@ -72,11 +80,28 @@
                y + ballRadius >= b.y &&
                y - ballRadius <= b.y + brickHeight && bricks[c][r].destroyed == false
            ) {
+             ctx.beginPath();
+             ctx.rect(b.x, b.y, brickWidth, brickHeight);
+             ctx.fillStyle = 'red';
+             ctx.fill();
+             ctx.closePath();
               bricks[c][r].destroyed = true;
               dy = -dy;
+              score += 200;
+              if ( score == 200*brickRowCount*brickColumnCount) {
+                // draw();
+                alert(`YOU WIN, CONGRATS!  TOTAL POINTS: ${score}!`);
+                document.location.reload();
+              }
           }
         }
       }
+    }
+
+    function drawScore() {
+        ctx.font = '16px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText("Score: " + score, 15, 30);
     }
 
     function drawBricks() {
@@ -90,7 +115,7 @@
           {
             ctx.beginPath();
             ctx.rect(brickX, brickY, brickWidth, brickHeight);
-            ctx.fillStyle = '#0095DD';
+            ctx.fillStyle = '#669900';
             ctx.fill();
             ctx.closePath();
           }
@@ -101,7 +126,7 @@
     function drawBall() {
       ctx.beginPath();
       ctx.arc( x, y, ballRadius, 0, Math.PI*2 );
-      ctx.fillStyle = "#0095DD"
+      ctx.fillStyle = "#cc3300"
       ctx.fill();
       ctx.closePath();
     }
@@ -109,7 +134,7 @@
     function drawPaddle() {
       ctx.beginPath();
       ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-      ctx.fillStyle = '#0095DD';
+      ctx.fillStyle = 'yellow';
       ctx.fill();
       ctx.closePath();
     }
@@ -122,7 +147,7 @@
       drawBall();
       drawPaddle();
       collisionDetection();
-
+      drawScore();
       if ( y + dy < ballRadius ) {
         dy = -dy;
       } else if ( y + dy > canvas.height - ballRadius - paddleHeight) {
@@ -138,19 +163,19 @@
 
 
           } else {
-            if (y + dy > canvas.height - ballRadius ) {
+            // if (y + dy > canvas.height - ballRadius ) {
               alert('GAME OVER');
               document.location.reload();
-            }
+            // }
           }
       }
       if ( x + dx < ballRadius || x + dx > canvas.width - ballRadius) {
         dx = -dx;
       }
 
-      if (rightPressed && paddleX < canvas.width - paddleWidth) {
+      if (rightPressed && paddleX + paddleWidth < canvas.width  - 11) {
         paddleX += 7;
-      } else if (leftPressed && paddleX > 0 ) {
+      } else if (leftPressed && paddleX > 11 ) {
         paddleX -= 7;
       }
       x += dx;
@@ -161,6 +186,15 @@
     setInterval(draw, 10)
 
   </script>
-
+  <img className='arcade-box' src='http://www.ludumdare.com/compo/wp-content/uploads/2014/05/interface.png'/>
+  <div class="how-to-play">
+    <h2 class='title'>How to Play</h2>
+    <div class='instruction-body'>
+      <h3><li>Move the paddle with mouse or left/right arrow key;</li></h3>
+      <h3><li>Catch the ball with the paddle;</li></h3>
+      <h3><li>Ball will bounce in the opposite direction after hitting the paddle;</li></h3>
+      <h3><li>Destroy all the bricks to win the game!</li> </h3>
+    </div>
+  </div>
   </body>
 </html>
