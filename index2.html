@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <canvas id='canvas' width='780' height='479'></canvas>
+    <script type="text/javascript">
+        function Test1() {
+            var ctx = document.getElementById('canvas');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                var img1 = new Image();
+                img1.src = 'images/green-game-brick.png';
+
+                img1.onload = function () {
+                    ctx.drawImage(img1, 0, 0);
+                };
+            }
+        }
+        Test1();
+    </script>
+  </body>
+</html>
