@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let ctx = canvas.getContext("2d");
   let canvasW = canvas.width;
   let canvasH = canvas.height;
-  let game = new Game(ctx, canvasW, canvasH );
-  // let game = new Bricks(ctx);
-  // bricks.drawBricks();
-  // game.animate();
+  let game = new Game(canvas, ctx, canvasW, canvasH );
+  // console.log('before animate called');
+  game.animate();
+  // console.log('after animate called');
 
 });
