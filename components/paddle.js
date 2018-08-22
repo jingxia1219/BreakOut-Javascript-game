@@ -6,6 +6,7 @@ class Paddle {
     this.paddleHeight = 12;
     this.paddleWidth = 91;
     this.paddleX = ( canvasW - this.paddleWidth)/2;
+    this.paddleY = (this.canvasH - this.paddleHeight -0.5);
   }
 
   drawPaddle() {
@@ -15,7 +16,7 @@ class Paddle {
     this.ctx.fillStyle = 'yellow';
     // console.log(this.canvasW);
     // console.log('paddlex', this.paddleX);
-    this.ctx.fillRect(this.paddleX, this.canvasH - this.paddleHeight -0.5, this.paddleWidth, this.paddleHeight);
+    this.ctx.fillRect(this.paddleX, this.paddleY, this.paddleWidth, this.paddleHeight);
     this.ctx.closePath();
   }
 }

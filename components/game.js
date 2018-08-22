@@ -2,12 +2,15 @@ const Brick = require('./brick');
 const Ball = require('./ball');
 const Paddle = require('./paddle');
 
+
 class Game {
   constructor(canvas, ctx, canvasW, canvasH ){
     this.canvas = canvas;
     this.ctx = ctx;
     this.canvasW = canvasW;
     this.canvasH = canvasH;
+    this.lives = 3;
+    this.score = 0;
     this.bricks = [];
     this.brickRowCount = 3;
     this.brickColumnCount = 8;
@@ -17,8 +20,9 @@ class Game {
     this.brickOffsetTop = 58;
     this.brickOffsetLeft= 38;
 
+    // this.score = new Score(ctx);
     this.paddle = new Paddle(ctx, canvasW, canvasH);
-    this.x = canvasW/2;
+    this.x = canvasW/2 ;
     this.y = canvasH - 37;
     this.ball = new Ball(ctx, canvasW, canvasH, this.x, this.y);
     this.rightPressed = false;
@@ -77,7 +81,16 @@ class Game {
     }
 
   }
-
+  drawScore() {
+    this.ctx.font = '16px Arial';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText("Score: " + this.score, 15, 30);
+  }
+  drawLife() {
+    this.ctx.font = '16px Arial';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText("Lives: "+ this.lives, this.canvasW - 100, 30);
+  }
   drawBricks(){
       this.bricks.forEach( brick => brick.drawBrick());
   }
@@ -86,6 +99,11 @@ class Game {
   //   this.ball.x += 2;
   //   this.ball.y += -2;
   // }
+  // resetGame(){
+  //   this.ball.x = this.x;
+  //   this.ball.y = this.y;
+  //   this.paddle.paddleX =
+  // }
   drawBall(){
     this.ctx.drawImage( this.ball.image, this.ball.x-this.ball.ballRadius, this.ball.y+5, this.ball.ballWidth, this.ball.ballHeight);
     if ( this.ball.x > 0 && this.ball.x < this.canvasW && this.ball.y < this.canvasH)
@@ -93,36 +111,53 @@ class Game {
     this.ball.y += this.ball.dy;
   }
   collisionDetection() {
-    if (this.ball.x - this.ball.ballRadius <= 0 || this.ball.x + this.ball.ballWidth >= this.canvasW) {
+    if (this.ball.x - this.ball.ballRadius <= 0 || this.ball.x + this.ball.ballRadius >= this.canvasW) {
       this.ball.dx = -this.ball.dx;
     }
     if ( this.ball.y <= 0 ) {
       this.ball.dy = -this.ball.dy;
     }
+    let notDestroyed = true;
     this.bricks.forEach( brick => {
       if (this.ball.y + this.ball.ballHeight >= brick.brickY && this.ball.y <= brick.brickY + brick.brickHeight
-        && this.ball.x + this.ball.ballWidth >= brick.brickX && this.ball.x <= brick.brickX + brick.brickWidth && brick.destroyed === false) {
+        && this.ball.x + this.ball.ballRadius > brick.brickX && this.ball.x - this.ball.ballRadius< brick.brickX + brick.brickWidth && brick.destroyed === false) {
+          // this.ctx.beginPath();
+          // this.ctx.rect(brick.brickX, brick.bricky, brick.brickWidth, brick.brickHeight);
+          // this.ctx.fillStyle = 'red';
+          // this.ctx.fill();
+          // this.ctx.closePath();
+          this.score += 250;
         brick.destroyed = true;
         // this.bricks.
-        this.ball.dy = -this.ball.dy;
+        if (notDestroyed) {
+          this.ball.dy = -this.ball.dy;
+          notDestroyed = false;
+        } 
         console.log(this.ball.dy);
         // this.animate();
       }
     }
   );
-    if (this.ball.y + this.ball.ballHeight >= this.canvasH - this.paddle.paddleHeight && this.ball.x > this.paddle.paddleX && this.ball.x < this.paddle.paddleX+ this.paddle.paddleWidth) {
-      this.ball.dy = -this.ball.dy;
-      this.ball.dy+=0.15;
-      if ( this.ball.dx > 0) {
-        this.ball.dx+=0.15;
+    if (this.ball.y + this.ball.ballHeight >= this.paddle.paddleY ) {
+      if (this.ball.x + this.ball.ballRadius > this.paddle.paddleX && this.ball.x + this.ball.ballRadius < this.paddle.paddleX+ this.paddle.paddleWidth) {
+        this.ball.dy = -this.ball.dy;
+        this.ball.dy+=0.15;
+        if ( this.ball.dx > 0) {
+          this.ball.dx+=0.15;
+        } else {
+          this.ball.dx -=0.15;
+        }
       } else {
-        this.ball.dx -=0.15;
+        // this.resetGame();
+        this.paddle = new Paddle(this.ctx, this.canvasW, this.canvasH);
+        this.ball = new Ball(this.ctx, this.canvasW, this.canvasH, this.x, this.y);
       }
     }
   }
   animate() {
     // console.log('log?',this.bricks);
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
+    this.drawScore();
     this.drawBricks();
     this.drawBall();
     this.paddle.drawPaddle();
