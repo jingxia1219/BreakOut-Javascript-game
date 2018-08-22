@@ -1,7 +1,7 @@
 class Ball {
   constructor(ctx, canvasW, canvasH, x, y) {
-    this.dx = 2;
-    this.dy = -2;
+    this.dx = 4;
+    this.dy = -4;
     this.canvasW = canvasW;
     this.x = x;
     this.y = y;

@@ -15,7 +15,7 @@ class Paddle {
     this.ctx.fillStyle = 'yellow';
     // console.log(this.canvasW);
     // console.log('paddlex', this.paddleX);
-    this.ctx.fillRect(this.paddleX, this.canvasH - this.paddleHeight, this.paddleWidth, this.paddleHeight);
+    this.ctx.fillRect(this.paddleX, this.canvasH - this.paddleHeight -0.5, this.paddleWidth, this.paddleHeight);
     this.ctx.closePath();
   }
 }

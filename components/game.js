@@ -19,7 +19,7 @@ class Game {
 
     this.paddle = new Paddle(ctx, canvasW, canvasH);
     this.x = canvasW/2;
-    this.y = canvasH - 35;
+    this.y = canvasH - 37;
     this.ball = new Ball(ctx, canvasW, canvasH, this.x, this.y);
     this.rightPressed = false;
     this.leftPressed = false;
@@ -57,14 +57,14 @@ class Game {
 }
 
   movePaddle(){
-    if (this.paddle.paddleX > this.paddle.paddleWidth/2 && this.paddle.paddleX < this.canvasW - this.paddle.paddleWidth/2 ) {
-      if ( this.rightPressed ) {
-      this.paddle.paddleX+= 5;
-      } else if ( this.leftPressed) {
-      this.paddle.paddleX-= 5;
+    // if (this.paddle.paddleX > this.paddle.paddleWidth/2 && this.paddle.paddleX < this.canvasW - this.paddle.paddleWidth/2 ) {
+      if ( this.rightPressed && this.paddle.paddleX + this.paddle.paddleWidth <= this.canvasW - 7) {
+      this.paddle.paddleX+= 7;
+    } else if ( this.leftPressed && this.paddle.paddleX > 7) {
+      this.paddle.paddleX-= 7;
       }
     }
-  }
+  // }
 
   createBricks() {
     for( let c = 0; c < 3; c++ ) {
@@ -96,25 +96,28 @@ class Game {
     if (this.ball.x - this.ball.ballRadius <= 0 || this.ball.x + this.ball.ballWidth >= this.canvasW) {
       this.ball.dx = -this.ball.dx;
     }
+    if ( this.ball.y <= 0 ) {
+      this.ball.dy = -this.ball.dy;
+    }
     this.bricks.forEach( brick => {
       if (this.ball.y + this.ball.ballHeight >= brick.brickY && this.ball.y <= brick.brickY + brick.brickHeight
-        && this.ball.x + this.ball.ballWidth >= brick.brickX && this.ball.x <= brick.brickX + brick.brickWidth) {
+        && this.ball.x + this.ball.ballWidth >= brick.brickX && this.ball.x <= brick.brickX + brick.brickWidth && brick.destroyed === false) {
         brick.destroyed = true;
         // this.bricks.
         this.ball.dy = -this.ball.dy;
         console.log(this.ball.dy);
-        this.animate();
+        // this.animate();
       }
     }
   );
     if (this.ball.y + this.ball.ballHeight >= this.canvasH - this.paddle.paddleHeight && this.ball.x > this.paddle.paddleX && this.ball.x < this.paddle.paddleX+ this.paddle.paddleWidth) {
       this.ball.dy = -this.ball.dy;
-      // this.ball.dy+=0.15;
-      // if ( this.ball.dx > 0) {
-      //   this.ball.dx+=0.15;
-      // } else {
-      //   this.ball.dx -=0.15;
-      // }
+      this.ball.dy+=0.15;
+      if ( this.ball.dx > 0) {
+        this.ball.dx+=0.15;
+      } else {
+        this.ball.dx -=0.15;
+      }
     }
   }
   animate() {
