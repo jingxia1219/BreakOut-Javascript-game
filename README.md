@@ -1,5 +1,6 @@
 ## Break Out - classic video game 
-
+### Game Preview
+![Alt Text](https://media.giphy.com/media/4NrBSWb5x4qTAYtHX1/giphy.gif)
 ### Break Out is a game consists of several columns and rows of bricks on the top, a ball, and a paddle on the bottom.
 ### how to play?
 The rule is simple: 
