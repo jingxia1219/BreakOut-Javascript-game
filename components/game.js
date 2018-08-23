@@ -5,6 +5,7 @@ const Paddle = require('./paddle');
 
 class Game {
   constructor(canvas, ctx, canvasW, canvasH ){
+    this.image = null;
     this.canvas = canvas;
     this.ctx = ctx;
     this.canvasW = canvasW;
@@ -158,11 +159,16 @@ class Game {
   }
   gameOver(){
     if (this.score === this.brickColumnCount*this.brickRowCount*250  ) {
-      alert('You Won!');
-      document.location.reload();
+      this.image = new Image();
+      this.image.src = './images/you-win.png';
+      this.ctx.drawImage( this.image, this.canvasW/2, this.canvasH/2, 260, 260);
+      // document.location.reload();
     } else if (this.lives === 0) {
-      alert('GAME OVER');
-      document.location.reload();
+      // alert('GAME OVER');
+      // document.location.reload();
+      this.image = new Image();
+      this.image.src = './images/game-over.png';
+      this.ctx.drawImage( this.image, this.canvasW/2, this.canvasH/2, 260, 260);
 
     }
   }

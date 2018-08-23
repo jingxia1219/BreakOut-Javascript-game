@@ -6,6 +6,23 @@ body {
   /* background-size: 73% */
 }
 
+div.links {
+  display: flex;
+  justify-content: space-between;
+}
+
+img.linkedin-image {
+  margin-top: 69px;
+  height: 26px;
+  width: auto;
+}
+
+img.github-image {
+  height: 40px;
+  width: auto;
+  margin-top: 62px;
+}
+
 img.arcade-box {
   /* order: 2; */
   /* z-index: 1; */
