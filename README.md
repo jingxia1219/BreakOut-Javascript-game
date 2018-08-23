@@ -26,4 +26,4 @@ The rule is simple:
 ### A snapshot of my project in progress:
 ![break out](https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/39608492_1791046224323917_7967867476060930048_n.jpg?_nc_cat=0&oh=2b63cce80e66879823598da6662e6b93&oe=5BF934CB)
 
-![alt text](https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/39995681_1796302530464953_4159712762894745600_n.jpg?_nc_cat=0&oh=8e69628a80bb4f44f8213cbf1733d6e4&oe=5C085495)
+
