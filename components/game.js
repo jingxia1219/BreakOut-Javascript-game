@@ -5,6 +5,7 @@ const Paddle = require('./paddle');
 
 class Game {
   constructor(canvas, ctx, canvasW, canvasH ){
+    this.requestId = null;
     this.image = null;
     this.canvas = canvas;
     this.ctx = ctx;
@@ -150,28 +151,14 @@ class Game {
         }
       } else {
         this.lives -= 1;
-        this.gameOver();
+        // this.gameOver();
         // this.resetGame();
         this.paddle = new Paddle(this.ctx, this.canvasW, this.canvasH);
         this.ball = new Ball(this.ctx, this.canvasW, this.canvasH, this.x, this.y);
       }
     }
   }
-  gameOver(){
-    if (this.score === this.brickColumnCount*this.brickRowCount*250  ) {
-      this.image = new Image();
-      this.image.src = './images/you-win.png';
-      this.ctx.drawImage( this.image, this.canvasW/2, this.canvasH/2, 260, 260);
-      // document.location.reload();
-    } else if (this.lives === 0) {
-      // alert('GAME OVER');
-      // document.location.reload();
-      this.image = new Image();
-      this.image.src = './images/game-over.png';
-      this.ctx.drawImage( this.image, this.canvasW/2, this.canvasH/2, 260, 260);
 
-    }
-  }
   animate() {
     // console.log('log?',this.bricks);
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
@@ -181,9 +168,22 @@ class Game {
     this.drawBall();
     this.paddle.drawPaddle();
     this.movePaddle();
-    // this.ball.createBall();
-    // this.moveBall();
     this.collisionDetection();
+
+    if (this.score === this.brickColumnCount*this.brickRowCount*250  ) {
+      this.image = new Image();
+      this.image.src = './images/you-win.png';
+      this.ctx.drawImage( this.image, this.canvasW/2 -100 , this.canvasH/2 - 80, 225, 180);
+      return;
+      // document.location.reload();
+    } else if (this.lives === 0) {
+      this.image = new Image();
+      this.ctx.clearRect(this.canvasW/2 - 100, 30, this.canvasW/2 - 80, 50);
+      this.image.src = './images/game-over.png';
+      this.ctx.drawImage( this.image, this.canvasW/2 -100 , this.canvasH/2 - 80, 245, 245);
+      this.drawLives();
+      return;
+    }
     requestAnimationFrame(this.animate.bind(this));
     // setTimeout(this.animate.bind(this), 100);
   }
