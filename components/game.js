@@ -86,7 +86,7 @@ class Game {
     this.ctx.fillStyle = 'white';
     this.ctx.fillText("Score: " + this.score, 15, 30);
   }
-  drawLife() {
+  drawLives() {
     this.ctx.font = '16px Arial';
     this.ctx.fillStyle = 'white';
     this.ctx.fillText("Lives: "+ this.lives, this.canvasW - 100, 30);
@@ -132,7 +132,7 @@ class Game {
         if (notDestroyed) {
           this.ball.dy = -this.ball.dy;
           notDestroyed = false;
-        } 
+        }
         console.log(this.ball.dy);
         // this.animate();
       }
@@ -148,16 +148,29 @@ class Game {
           this.ball.dx -=0.15;
         }
       } else {
+        this.lives -= 1;
+        this.gameOver();
         // this.resetGame();
         this.paddle = new Paddle(this.ctx, this.canvasW, this.canvasH);
         this.ball = new Ball(this.ctx, this.canvasW, this.canvasH, this.x, this.y);
       }
     }
   }
+  gameOver(){
+    if (this.score === this.brickColumnCount*this.brickRowCount*250  ) {
+      alert('You Won!');
+      document.location.reload();
+    } else if (this.lives === 0) {
+      alert('GAME OVER');
+      document.location.reload();
+
+    }
+  }
   animate() {
     // console.log('log?',this.bricks);
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
     this.drawScore();
+    this.drawLives();
     this.drawBricks();
     this.drawBall();
     this.paddle.drawPaddle();
