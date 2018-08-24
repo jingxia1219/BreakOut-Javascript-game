@@ -96,7 +96,8 @@ The rule is simple:
 ### Features:
 * The Ball will moves a little bit faster every time after hitting the paddle.
 * The score goes up by 200 every time a brick is destroyed by the ball
-* After clearing stage, play will go to the next stage with an increase in difficulty
+* After user clear all bricks, or run out of lives, either a winning or losing message box will pop up in the center and at the same time the background will darken 
+* Player can hit the restart button under instruction anytime to restart the game
 
 ### A snapshot of my project in progress:
 ![break out](https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/40002116_1797590337002839_6875587306196041728_n.jpg?_nc_cat=0&oh=e7708f8bb7c4d7c073b537b968c2225b&oe=5BEDB361)
