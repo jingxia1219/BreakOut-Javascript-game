@@ -58,7 +58,7 @@ class Game {
   }
   handleTouchStart(e) {
     e.preventDefault();
-    let relativeX = e.clientX - this.canvasW/2;
+    let relativeX = e.touches[0].clientX - this.canvasW/2;
     if ( relativeX < 0 ) {
       this.leftPressed = true;
       this.rightPressed = false;
