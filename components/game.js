@@ -1,14 +1,15 @@
 const Brick = require('./brick');
 const Ball = require('./ball');
 const Paddle = require('./paddle');
-
+// const newGame = require('./app');
+// import { newGame } from './app';
 
 class Game {
   constructor(canvas, ctx, canvasW, canvasH ){
+    this.requestId = null;
     this.over = false;
     this.background = new Image();
     this.background.src = 'images/canvas-background-copy.jpg';
-    this.image = null;
     this.canvas = canvas;
     this.ctx = ctx;
     this.canvasW = canvasW;
@@ -30,12 +31,21 @@ class Game {
     this.ball = new Ball(ctx, canvasW, canvasH, this.x, this.y);
     this.rightPressed = false;
     this.leftPressed = false;
-
     this.createBricks();
     this.paddleListeners();
     this.ball.createBall();
   }
-
+  handleTouchStart(e) {
+    e.preventDefault();
+    let relativeX = e.touches[0].clientX - this.canvasW/2;
+    if ( relativeX < 0 ) {
+      this.leftPressed = true;
+      this.rightPressed = false;
+    } else if ( relativeX > 0 ) {
+      this.rightPressed = true;
+      this.leftPressed = false;
+    }
+  }
   mouseMoveHandler(e) {
     let relativeX = e.clientX - this.canvas.offsetLeft;
     if ( relativeX > this.paddle.paddleWidth/2+ 3 && relativeX < this.paddle.canvasW - this.paddle.paddleWidth/2 - 3 ) {
@@ -56,27 +66,13 @@ class Game {
       this.leftPressed = false;
     }
   }
-  handleTouchStart(e) {
-    e.preventDefault();
-    let relativeX = e.touches[0].clientX - this.canvasW/2;
-    if ( relativeX < 0 ) {
-      this.leftPressed = true;
-      this.rightPressed = false;
-    } else if ( relativeX > 0 ) {
-      this.rightPressed = true;
-      this.leftPressed = false;
-    }
-  }
-  handleTouchEnd(e){
-    // this.leftPressed =
-  }
+
   paddleListeners() {
     document.addEventListener("touchstart", this.handleTouchStart.bind(this), false);
     document.addEventListener("touchstart", this.handleTouchEnd.bind(this), false);
     document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
     document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
     document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
-
 }
   movePaddle(){
       if ( this.rightPressed && this.paddle.paddleX + this.paddle.paddleWidth <= this.canvasW - 7) {
@@ -151,7 +147,7 @@ class Game {
     }
   }
   gameOver() {
-    this.image = new Image();
+    let overImage = new Image();
     if (this.score === 250 * this.brickColumnCount * this.brickRowCount  ) {
       this.over = true;
       this.ctx.drawImage( this.background, 0 , 0, this.canvasW, this.canvasH);
@@ -160,8 +156,8 @@ class Game {
       this.drawBricks();
       this.drawBall();
         this.paddle.drawPaddle();
-      this.image.src = './images/you-win.png';
-      this.ctx.drawImage( this.image, this.canvasW/2 - 200 , this.canvasH/2 - 50, 380, 110);
+      overImage.src = './images/you-win.png';
+      this.ctx.drawImage( overImage, this.canvasW/2 - 200 , this.canvasH/2 - 50, 380, 110);
       // cancelAnimationFrame();
     } else if (this.lives === 0) {
       this.over = true;
@@ -172,13 +168,22 @@ class Game {
           this.drawBricks();
           this.drawBall();
             this.paddle.drawPaddle();
-      this.image.src = './images/game-over.png';
-      this.ctx.drawImage( this.image, this.canvasW/2 -100 , this.canvasH/2 - 80, 245, 245);
+      overImage.src = './images/game-over.png';
+      this.ctx.drawImage( overImage, this.canvasW/2 -100 , this.canvasH/2 - 80, 245, 245);
     }
   }
+  restart() {
+    console.log('restart');
+
+    cancelAnimationFrame(this.requestId);
+    // let game = new Game(this.canvas, this.ctx, this.canvasW, this.canvasH);
+    // game.animate();
+  }
+
   animate() {
     // console.log('try');
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
+    // this.drawRestart();
     this.drawScore();
     this.drawLives();
     this.drawBricks();
@@ -188,7 +193,7 @@ class Game {
     this.collisionDetection();
     this.gameOver();
     if ( !this.over )  {
-    requestAnimationFrame(this.animate.bind(this));
+    this.requestId = requestAnimationFrame(this.animate.bind(this));
     }
   }
 }

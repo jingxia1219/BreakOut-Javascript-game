@@ -1,6 +1,6 @@
 class Brick {
     constructor(ctx, brickWidth, brickHeight, x, y) {
-        this.ctx = ctx; 
+        this.ctx = ctx;
         this.brickWidth = brickWidth;
         this.brickHeight = brickHeight;
         this.brickX= x;
@@ -12,7 +12,6 @@ class Brick {
 
      drawBrick(){
        if ( this.destroyed === false) {
-        // this.image.onload = () => this.ctx.drawImage(this.image, this.brickX, this.brickY, this.brickWidth, this.brickHeight);
          this.ctx.drawImage(this.image, this.brickX, this.brickY, this.brickWidth, this.brickHeight);
        }
       }

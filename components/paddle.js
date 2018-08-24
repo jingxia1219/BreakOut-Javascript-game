@@ -10,12 +10,9 @@ class Paddle {
   }
 
   drawPaddle() {
-    // this.ctx.fillStyle='yellow';
-    // this.ctx.fillRect(10,10,250,100);
+    this.image = new Image();
     this.ctx.beginPath();
     this.ctx.fillStyle = 'yellow';
-    // console.log(this.canvasW);
-    // console.log('paddlex', this.paddleX);
     this.ctx.fillRect(this.paddleX, this.paddleY, this.paddleWidth, this.paddleHeight);
     this.ctx.closePath();
   }

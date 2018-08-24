@@ -6,21 +6,31 @@ body {
   /* background-size: 73% */
 }
 
+img#restart-button {
+  margin-top: 15px;
+  height: 75px;
+  width: auto;
+  margin-left: 33px;
+}
+img#restart-button:hover {
+  cursor: pointer;
+}
+
 div.links {
   display: flex;
   justify-content: space-between;
 }
 
 img.linkedin-image {
-  margin-top: 69px;
+  margin-top: 39px;
   height: 26px;
   width: auto;
 }
 
 img.github-image {
-  height: 40px;
+  height: 38px;
   width: auto;
-  margin-top: 62px;
+  margin-top: 33px;
 }
 
 img.arcade-box {
@@ -62,13 +72,14 @@ div.how-to-play {
   margin-left: 800px;
   width: 210px;
   height: 520px;
-  padding-top: 80px;
+  padding-top: 50px;
   padding-left: 20px;
   padding-right: 15px;
   align-content: center;
   background-size: 35%;
   background-image: url("./images/brick-background.jpg");
   backface-visibility: 0.8;
+  padding-bottom: 30px;
 }
 
 h2.title {
