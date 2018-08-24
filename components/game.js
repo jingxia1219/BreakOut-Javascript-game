@@ -57,6 +57,7 @@ class Game {
     }
   }
   handleTouchStart(e) {
+    e.preventDefault();
     let relativeX = e.clientX - this.canvasW/2;
     if ( relativeX < 0 ) {
       this.leftPressed = true;
@@ -176,7 +177,7 @@ class Game {
     }
   }
   animate() {
-    // console.log('does it work?');
+    console.log('does it work?');
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
     this.drawScore();
     this.drawLives();
