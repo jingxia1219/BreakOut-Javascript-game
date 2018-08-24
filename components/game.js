@@ -177,7 +177,7 @@ class Game {
     }
   }
   animate() {
-    console.log('does it work?');
+    console.log('try');
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
     this.drawScore();
     this.drawLives();
