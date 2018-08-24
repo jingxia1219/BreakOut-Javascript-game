@@ -56,7 +56,23 @@ class Game {
       this.leftPressed = false;
     }
   }
+  handleTouchStart(e) {
+    let relativeX = e.clientX - this.canvasW/2;
+    if ( relativeX < 0 ) {
+      this.leftPressed = true;
+      this.rightPressed = false;
+    } else if ( relativeX > 0 ) {
+      this.rightPressed = true;
+      this.leftPressed = false;
+    }
+  }
+  handleTouchEnd(e){
+    // this.leftPressed =
+  }
   paddleListeners() {
+    console.log('does it work?');
+    document.addEventListener("touchstart", this.handleTouchStart.bind(this), false);
+    document.addEventListener("touchstart", this.handleTouchEnd.bind(this), false);
     document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
     document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
     document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
@@ -158,7 +174,6 @@ class Game {
             this.paddle.drawPaddle();
       this.image.src = './images/game-over.png';
       this.ctx.drawImage( this.image, this.canvasW/2 -100 , this.canvasH/2 - 80, 245, 245);
-      // cancelAnimationFrame();
     }
   }
   animate() {
