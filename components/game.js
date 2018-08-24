@@ -150,7 +150,7 @@ class Game {
       // cancelAnimationFrame();
     } else if (this.lives === 0) {
       this.over = true;
-          // this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
+          this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
           this.ctx.drawImage( this.background, 0 , 0, this.canvasW, this.canvasH);
           this.drawScore();
           this.drawLives();
