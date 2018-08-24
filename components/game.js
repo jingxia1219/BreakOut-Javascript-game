@@ -70,7 +70,6 @@ class Game {
     // this.leftPressed =
   }
   paddleListeners() {
-    console.log('does it work?');
     document.addEventListener("touchstart", this.handleTouchStart.bind(this), false);
     document.addEventListener("touchstart", this.handleTouchEnd.bind(this), false);
     document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
@@ -177,6 +176,7 @@ class Game {
     }
   }
   animate() {
+    console.log('does it work?');
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
     this.drawScore();
     this.drawLives();
