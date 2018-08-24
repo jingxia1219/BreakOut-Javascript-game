@@ -115,7 +115,6 @@ class Game {
           this.ball.dy = -this.ball.dy;
           notDestroyed = false;
         }
-        console.log(this.ball.dy);
       }
     }
   );
