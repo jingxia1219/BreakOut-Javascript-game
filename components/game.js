@@ -35,17 +35,7 @@ class Game {
     this.paddleListeners();
     this.ball.createBall();
   }
-  handleTouchStart(e) {
-    e.preventDefault();
-    let relativeX = e.touches[0].clientX - this.canvasW/2;
-    if ( relativeX < 0 ) {
-      this.leftPressed = true;
-      this.rightPressed = false;
-    } else if ( relativeX > 0 ) {
-      this.rightPressed = true;
-      this.leftPressed = false;
-    }
-  }
+
   mouseMoveHandler(e) {
     let relativeX = e.clientX - this.canvas.offsetLeft;
     if ( relativeX > this.paddle.paddleWidth/2+ 3 && relativeX < this.paddle.canvasW - this.paddle.paddleWidth/2 - 3 ) {
@@ -66,13 +56,27 @@ class Game {
       this.leftPressed = false;
     }
   }
-
+  handleTouchStart(e) {
+    e.preventDefault();
+    let relativeX = e.touches[0].clientX - this.canvasW/2;
+    if ( relativeX < 0 ) {
+      this.leftPressed = true;
+      this.rightPressed = false;
+    } else if ( relativeX > 0 ) {
+      this.rightPressed = true;
+      this.leftPressed = false;
+    }
+  }
+  handleTouchEnd(e){
+    // this.leftPressed =
+  }
   paddleListeners() {
     document.addEventListener("touchstart", this.handleTouchStart.bind(this), false);
     document.addEventListener("touchstart", this.handleTouchEnd.bind(this), false);
     document.addEventListener("keydown", this.keyDownHandler.bind(this), false);
     document.addEventListener("keyup", this.keyUpHandler.bind(this), false);
     document.addEventListener("mousemove", this.mouseMoveHandler.bind(this), false);
+
 }
   movePaddle(){
       if ( this.rightPressed && this.paddle.paddleX + this.paddle.paddleWidth <= this.canvasW - 7) {
@@ -156,7 +160,7 @@ class Game {
       this.drawBricks();
       this.drawBall();
         this.paddle.drawPaddle();
-      overImage.src = './images/you-win.png';
+      overImage.src = './Images/you-win.png';
       this.ctx.drawImage( overImage, this.canvasW/2 - 200 , this.canvasH/2 - 50, 380, 110);
       // cancelAnimationFrame();
     } else if (this.lives === 0) {
