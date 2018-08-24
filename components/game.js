@@ -160,7 +160,7 @@ class Game {
       this.drawBricks();
       this.drawBall();
         this.paddle.drawPaddle();
-      overImage.src = './Images/you-win.png';
+      overImage.src = './images/you-win.png';
       this.ctx.drawImage( overImage, this.canvasW/2 - 200 , this.canvasH/2 - 50, 380, 110);
       // cancelAnimationFrame();
     } else if (this.lives === 0) {
@@ -182,9 +182,7 @@ class Game {
   }
 
   animate() {
-    // console.log('try');
     this.ctx.clearRect(0, 0, this.canvasW, this.canvasH);
-    // this.drawRestart();
     this.drawScore();
     this.drawLives();
     this.drawBricks();
