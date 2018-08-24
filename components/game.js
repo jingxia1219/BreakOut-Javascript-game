@@ -178,10 +178,7 @@ class Game {
   }
   restart() {
     console.log('restart');
-
     cancelAnimationFrame(this.requestId);
-    // let game = new Game(this.canvas, this.ctx, this.canvasW, this.canvasH);
-    // game.animate();
   }
 
   animate() {
