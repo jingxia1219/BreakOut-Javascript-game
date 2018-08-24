@@ -34,7 +34,6 @@ class Brick {
            this.brickY = this.brickOffsetTop + (this.brickHeight + this.brickPadding)*r;
            this.bricks[c][r].x = this.brickX;
            this.bricks[c][r].y = this.brickY;
-           console.log(this.bricks);
            // debugger;
            if ( this.bricks[c][r].destroyed == false)
            {
