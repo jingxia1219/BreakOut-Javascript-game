@@ -13,7 +13,6 @@ function newGame() {
   let canvasH = canvas.height;
   let game = new Game(canvas, ctx, canvasW, canvasH );
   game.animate();
-  console.log('new game');
 }
 
 document.addEventListener("DOMContentLoaded",()=> {
