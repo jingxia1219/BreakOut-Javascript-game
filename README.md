@@ -1,6 +1,6 @@
 ## Break Out - classic video game
 
-[Live Link](https://jingxia1219.github.io/Javascript-Game/)
+[Live Link](https://jingxia1219.github.io/BreakOut-Javascript-game/)
 
 ### Game Preview
 ![Alt Text](https://media.giphy.com/media/4NrBSWb5x4qTAYtHX1/giphy.gif)
